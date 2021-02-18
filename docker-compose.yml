@@ -1,0 +1,15 @@
+version: '3.4'
+
+services:
+  erthsobesdb:
+    image: erthsobes/erthsobes-db
+
+  erthsobesservis:
+    image: erthsobes/erthsobesservis
+
+  taskservice.api:
+    image: ${DOCKER_REGISTRY-}taskserviceapi
+    build:
+      context: .
+      dockerfile: TaskService.API/Dockerfile
+ 

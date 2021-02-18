@@ -1,0 +1,28 @@
+version: '3.4'
+
+services:
+
+  erthsobesservis:
+    ports:
+      - "6500:6500"
+
+  erthsobesdb:
+    environment:  
+      - POSTGRES_USER=orders
+      - POSTGRES_PASSWORD=orders
+      - POSTGRES_DB=orders
+    ports:
+      - "5432:5432"
+ 
+  taskservice.api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:80
+      - PostgresConnection=Host=erthsobesdb;Port=5432;Database=orders;Username=orders;Password=orders
+      - ErthsobesserviceUrl=http://erthsobesservis:6500
+    ports:
+      - "5101:80"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+  
