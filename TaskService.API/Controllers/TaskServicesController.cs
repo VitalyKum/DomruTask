@@ -26,7 +26,7 @@ namespace TaskService.API.Controllers
             _erthsobesSvc = erthsobesSvc;
             _context = context;
         }
-
+        //for explore db objects
         [HttpGet("api/Orders")]
         public async Task<IActionResult> Get()
         {
